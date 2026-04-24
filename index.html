@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Deletion Request – Gyanex</title>
+  <link rel="icon" type="image/png" href="https://ik.imagekit.io/ClassFury/logo/logo_gyanex-removebg-preview.png" />
+  <meta name="description" content="Request account deletion for Gyanex by Furiouss Tech Solutions. Learn how to delete your account, what data is removed, and our data retention policy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-primary:    #000000;
+      --bg-secondary:  #0d0d0d;
+      --bg-card:       #111111;
+      --bg-card-hover: #181818;
+      --red-primary:   #E53935;
+      --red-light:     #ff5252;
+      --red-dim:       #b71c1c;
+      --red-glow:      rgba(229, 57, 53, 0.15);
+      --red-border:    rgba(229, 57, 53, 0.30);
+      --text-primary:  #f5f5f5;
+      --text-secondary:#adadad;
+      --text-muted:    #5c5c5c;
+      --divider:       rgba(255,255,255,0.07);
+      --radius:        14px;
+      --mono:          'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    #progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red-primary), var(--red-light));
+      z-index: 300;
+      transition: width 0.08s linear;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .header-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 0 16px var(--red-glow);
+    }
+
+    .logo-icon img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+    }
+
+    .badge {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red-light);
+      border: 1px solid var(--red-border);
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--red-glow);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 80px 24px 52px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--red-border), transparent);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red-light);
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--red-border);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 .gradient-word {
+      background: linear-gradient(130deg, #ffffff 30%, var(--red-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-company {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .section-num {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red-primary);
+      background: var(--red-glow);
+      border: 1px solid var(--red-border);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    .section-title-line {
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    /* ── SECTION CARDS ── */
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      transition: border-color 0.3s, background 0.3s, transform 0.25s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red-primary), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .section-card:hover {
+      border-color: var(--red-border);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(229,57,53,0.07);
+    }
+
+    .section-card:hover::before { opacity: 1; }
+
+    .section-card h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+
+    .section-card p {
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .section-card p:last-child { margin-bottom: 0; }
+
+    /* ── STEP CARDS (How to Delete) ── */
+    .steps-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--divider);
+      border-radius: 10px;
+      padding: 14px 18px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .step-item:hover {
+      border-color: var(--red-border);
+      background: #141414;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--red-glow);
+      border: 1px solid var(--red-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--red-light);
+    }
+
+    .step-text {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      padding-top: 4px;
+    }
+
+    .step-text strong { color: var(--text-primary); font-weight: 600; }
+
+    /* ── OR DIVIDER ── */
+    .or-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 6px 0;
+    }
+
+    .or-divider span {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .or-line {
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    /* ── EMAIL OPTION ── */
+    .email-option {
+      background: linear-gradient(135deg, #130000, #0a0000);
+      border: 1px solid var(--red-border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-top: 6px;
+    }
+
+    .email-option p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .email-option p:last-child { margin-bottom: 0; }
+
+    .email-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--red-primary);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      font-family: var(--mono);
+      letter-spacing: 0.02em;
+      transition: background 0.25s, box-shadow 0.25s, transform 0.2s;
+      margin-top: 4px;
+    }
+
+    .email-link:hover {
+      background: var(--red-light);
+      box-shadow: 0 0 24px rgba(229,57,53,0.45);
+      transform: translateY(-1px);
+    }
+
+    .email-link svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .subject-tag {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 2px 8px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* ── DATA GRID ── */
+    .data-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .data-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--divider);
+      border-radius: 10px;
+      padding: 16px 18px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .data-item:hover {
+      border-color: var(--red-border);
+      background: #141414;
+    }
+
+    .data-icon {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--red-glow);
+      border: 1px solid var(--red-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .data-icon svg {
+      width: 16px; height: 16px;
+      fill: none;
+      stroke: var(--red-light);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .data-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .data-info strong {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .data-info span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ── RETENTION CALLOUTS ── */
+    .retention-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .retention-item {
+      border-radius: 10px;
+      padding: 20px 22px;
+      border: 1px solid var(--divider);
+    }
+
+    .retention-item.primary {
+      background: linear-gradient(135deg, #130000, #0d0000);
+      border-color: var(--red-border);
+    }
+
+    .retention-item.secondary {
+      background: var(--bg-secondary);
+    }
+
+    .retention-num {
+      font-family: var(--mono);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--red-primary);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .retention-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .retention-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .warning-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--red-light);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .warning-icon svg {
+      width: 14px; height: 14px;
+      fill: none;
+      stroke: var(--red-light);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight-box {
+      background: var(--red-glow);
+      border: 1px solid var(--red-border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-top: 20px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .highlight-box strong { color: var(--red-light); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--divider);
+      text-align: center;
+      padding: 30px 24px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--red-light); }
+
+    footer .dot { margin: 0 10px; opacity: 0.4; }
+    footer .brand { color: var(--red-primary); font-weight: 600; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .section-card { padding: 26px 22px; }
+      .hero { padding: 56px 20px 40px; }
+      main { padding: 40px 16px 64px; gap: 24px; }
+      .retention-grid { grid-template-columns: 1fr; }
+      .data-grid { grid-template-columns: 1fr; }
+      .header-inner { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-bar"></div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="#">
+        <div class="logo-icon">
+          <img src="https://ik.imagekit.io/ClassFury/logo/logo_gyanex-removebg-preview.png" alt="Gyanex Logo" />
+        </div>
+        <span class="logo-text">Gyanex</span>
+      </a>
+      <span class="badge">Account Deletion</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Account Management</div>
+    <h1><span class="gradient-word">Account Deletion</span><br>Request</h1>
+    <p class="hero-sub">We respect your right to data privacy. Here's everything you need to know about deleting your Gyanex account.</p>
+    <span class="hero-company">By Furiouss Tech Solutions</span>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- Section 1: How to Delete -->
+    <div class="section-card">
+      <div class="section-label">
+        <span class="section-num">01</span>
+        <div class="section-title-line"></div>
+      </div>
+      <h2>How to Delete Your Account</h2>
+      <p>You can delete your Gyanex account directly from the app or by contacting our support team via email.</p>
+
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-text">Open the <strong>Gyanex app</strong> and log in to your account.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">Go to <strong>Profile</strong> &rsaquo; <strong>Settings</strong>.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-text">Tap <strong>"Delete Account"</strong> from the settings menu.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Confirm deletion</strong> when prompted to finalize the request.</div>
+        </div>
+      </div>
+
+      <div class="or-divider">
+        <div class="or-line"></div>
+        <span>OR</span>
+        <div class="or-line"></div>
+      </div>
+
+      <div class="email-option">
+        <p>Send us an email and our team will process your deletion request within 2 business days.</p>
+        <p><strong>Subject line required:</strong></p>
+        <div class="subject-tag">"Account Deletion Request"</div>
+        <br />
+        <p style="margin-top: 10px; font-size: 0.85rem;">Include your <strong style="color: var(--text-primary);">registered email address</strong> in the message body.</p>
+        <a class="email-link" href="mailto:support.gyanex@gmail.com?subject=Account%20Deletion%20Request">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
+          support.gyanex@gmail.com
+        </a>
+      </div>
+    </div>
+
+    <!-- Section 2: What Data Gets Deleted -->
+    <div class="section-card">
+      <div class="section-label">
+        <span class="section-num">02</span>
+        <div class="section-title-line"></div>
+      </div>
+      <h2>What Data Gets Deleted?</h2>
+      <p>Upon a confirmed deletion request, the following data associated with your account will be permanently removed:</p>
+
+      <div class="data-grid">
+        <div class="data-item">
+          <div class="data-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="data-info">
+            <strong>Profile Information</strong>
+            <span>Name, email, profile picture</span>
+          </div>
+        </div>
+        <div class="data-item">
+          <div class="data-icon">
+            <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="data-info">
+            <strong>Class & Assignment Data</strong>
+            <span>Classes, assignments, activity history</span>
+          </div>
+        </div>
+        <div class="data-item">
+          <div class="data-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div class="data-info">
+            <strong>Purchase Records</strong>
+            <span>Subscription &amp; payment history</span>
+          </div>
+        </div>
+        <div class="data-item">
+          <div class="data-icon">
+            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div class="data-info">
+            <strong>Firebase Account Data</strong>
+            <span>All associated backend records</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <strong>⚠ Warning:</strong> Account deletion is <strong>permanent and irreversible</strong>. Once confirmed, your data cannot be recovered, and access to Gyanex will be revoked immediately.
+      </div>
+    </div>
+
+    <!-- Section 3: Data Retention Policy -->
+    <div class="section-card">
+      <div class="section-label">
+        <span class="section-num">03</span>
+        <div class="section-title-line"></div>
+      </div>
+      <h2>Data Retention Policy</h2>
+      <p>We are committed to transparent and legally compliant data practices. Here is our retention timeline:</p>
+
+      <div class="retention-grid">
+        <div class="retention-item primary">
+          <div class="warning-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Deletion Window
+          </div>
+          <div class="retention-num">45</div>
+          <div class="retention-label">Days to Permanent Deletion</div>
+          <div class="retention-desc">All personal account data is permanently and irreversibly deleted within 45 days of your confirmed deletion request.</div>
+        </div>
+        <div class="retention-item secondary">
+          <div class="warning-icon" style="color: var(--text-muted); margin-bottom: 8px;">
+            <svg viewBox="0 0 24 24" style="stroke: var(--text-muted)"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Legal Compliance
+          </div>
+          <div class="retention-num" style="color: var(--text-muted); font-size: 1.3rem; margin-top: 6px;">Anonymized</div>
+          <div class="retention-label">Aggregated Data Only</div>
+          <div class="retention-desc">Some anonymized, non-identifiable data may be retained strictly for legal, regulatory, or compliance obligations — never linked to your identity.</div>
+        </div>
+      </div>
+
+      <div class="highlight-box" style="margin-top: 20px;">
+        <strong>Note:</strong> During the 45-day window, you may contact <strong>support.gyanex@gmail.com</strong> to cancel your deletion request. After this period, recovery is not possible.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>
+      &copy; 2026 <span class="brand">Gyanex</span>. All rights reserved.
+      <span class="dot">&bull;</span>
+      <a href="mailto:support.gyanex@gmail.com">support.gyanex@gmail.com</a>
+      <span class="dot">&bull;</span>
+      Furiouss Tech Solutions
+    </p>
+  </footer>
+
+  <script>
+    // Scroll progress bar
+    const bar = document.getElementById('progress-bar');
+    window.addEventListener('scroll', () => {
+      const st = document.documentElement.scrollTop;
+      const dh = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = (dh > 0 ? (st / dh * 100) : 0) + '%';
+    });
+
+    // Entrance animations
+    const cards = document.querySelectorAll('.section-card');
+    cards.forEach((card, i) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(28px)';
+      card.style.transition = `opacity 0.55s ease ${i * 0.1}s, transform 0.55s ease ${i * 0.1}s, border-color 0.3s, background 0.3s, box-shadow 0.3s`;
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    cards.forEach(c => observer.observe(c));
+
+    // Step items stagger on load
+    const stepItems = document.querySelectorAll('.step-item, .data-item');
+    stepItems.forEach((item, i) => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateX(-12px)';
+      item.style.transition = `opacity 0.4s ease ${0.35 + i * 0.07}s, transform 0.4s ease ${0.35 + i * 0.07}s, border-color 0.25s, background 0.25s`;
+    });
+
+    const stepObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateX(0)';
+          stepObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05 });
+
+    stepItems.forEach(el => stepObserver.observe(el));
+  </script>
+
+</body>
+</html>
